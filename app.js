@@ -1,52 +1,20 @@
-/* The following is an example on how you might structure your code.
-This is not the only way to complete this assignment.
-Feel free to disregard and create your own code */
-
-// Define a function that will create metadata for given sample
-function buildMetadata(sample) {
-
-    // Read the json data
-
-        // Parse and filter the data to get the sample's metadata
-
-        // Specify the location of the metadata and update it
-
-}
-
-// Define a function that will create charts for given sample
-function buildCharts(sample) {
-
-    // Read the json data
-
-        // Parse and filter the data to get the sample's OTU data
-        // Pay attention to what data is required for each chart
-
-        // Create bar chart in correct location
-
-        // Create bubble chart in correct location
-    
-}
-
-// Define function that will run on page load
-function init() {
-
-    // Read json data
-
-        // Parse and filter data to get sample names
-
-        // Add dropdown option for each sample
-
-    // Use first sample to build metadata and initial plots
-
-}
-
-function optionChanged(newSample){
-
-    // Update metadata with newly selected sample
-
-    // Update charts with newly selected sample
-
-}
-
-// Initialize dashboard on page load
-init();
+//Use d3 to select the panel with id of `#sample-metadata`
+  // Use `.html("") to clear any existing metadata
+  var metadataIDTag = d3.select("#sample-metadata");
+  document.getElementById("sample-metadata").innerHTML = "";
+  var ul = metadataIDTag.append('ul'); 
+// Use `d3.json` to fetch the metadata for a sample
+var sampleURL = `/metadata/${sample}`;
+  d3.json(sampleURL).then(function(data){ 
+    mykeys = d3.keys(data).map(function(x){ return x.toUpperCase() })
+    myvalues = d3.values(data);
+    var myobjects = mykeys.map(function(e, i) {
+      return e + " : "+ myvalues[i] + "</br>";
+    });
+   
+    ul.selectAll('li')
+	    .data(myobjects)
+    	.enter()
+	    .append('li')
+	    .html(String); 
+  });
