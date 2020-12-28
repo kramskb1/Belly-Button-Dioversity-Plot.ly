@@ -1,20 +1,41 @@
 //Use d3 to select the panel with id of `#sample-metadata`
   // Use `.html("") to clear any existing metadata
-  var metadataIDTag = d3.select("#sample-metadata");
-  document.getElementById("sample-metadata").innerHTML = "";
-  var ul = metadataIDTag.append('ul'); 
+//   var metadataIDTag = d3.select("#sample-metadata");
+//   document.getElementById("sample-metadata").innerHTML = "";
+//   var ul = metadataIDTag.append('ul'); 
 // Use `d3.json` to fetch the metadata for a sample
-var sampleURL = `/metadata/${sample}`;
-  d3.json(sampleURL).then(function(data){ 
-    mykeys = d3.keys(data).map(function(x){ return x.toUpperCase() })
-    myvalues = d3.values(data);
-    var myobjects = mykeys.map(function(e, i) {
-      return e + " : "+ myvalues[i] + "</br>";
-    });
-   
-    ul.selectAll('li')
-	    .data(myobjects)
-    	.enter()
-	    .append('li')
-	    .html(String); 
-  });
+// var sampleURL = `/metadata/${sample}`;
+function dropdown () {
+
+
+  d3.json("samples.json").then(function(data){
+      var names = data.names;
+      console.log(names) 
+   var dropdown =d3.select ("#selDataset");
+   names.forEach ((sample)=>{
+       dropdown.append("option")
+       .text(sample)
+       .property("value",sample);
+   });
+   var sample = names[0];
+   metadata(sample);
+   });
+  
+}
+dropdown();
+function metadata (dataid) {
+    d3.json("samples.json").then(function(data){
+        var metadata = data.metadata;
+        var dataarray = metadata.filter(sample=>sample.id==dataid);
+        var result = dataarray[0];
+        console.log(result);
+        var panel = d3.select("#sample-metadata");
+        panel.html("");
+        Object.entries(result).forEach(([key,value])=>{
+            panel.append("h6").text(`${key}${value}`);
+        }
+        );
+
+
+});
+}
