@@ -35,7 +35,26 @@ function metadata (dataid) {
             panel.append("h6").text(`${key}${value}`);
         }
         );
-
-
+        var trace = {
+            values: values,
+            labels: labels,
+            type: "pie",
+            text: hovers,
+            hoverinfo: "label+text+value+percent",
+            textinfo: "percent"
+        };
+        var data = [trace]
+        var layout = {
+            margin: {
+                l: 10,
+                r: 10,
+                b: 10,
+                t: 10,
+                pad: 4
+            }
+        }   
+  
+        Plotly.newPlot("pieChart", data, layout)
+    });
+  };
 });
-}
