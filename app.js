@@ -57,4 +57,8 @@ function metadata (dataid) {
         Plotly.newPlot("pieChart", data, layout)
     });
   };
+  const firstSample = sampleNames[0];
+  buildCharts(firstSample);
+  buildMetadata(firstSample);
 });
+
