@@ -1,1 +1,3 @@
-	I built an interactive dashboard to explore the Belly Button Biodiversity dataset. 
+	I built an interactive dashboard to explore the Belly Button Biodiversity dataset. I populated a dropdown menu with all of the sample IDs. I defined the optionChanged() function in my javascript. I created a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in a certain individual. 
+	I used sample_values as the values for the bar chart. I used otu_ids as the labels for the bar chart. I used out_labels as the hovertext for the chart. A bubble chart was created that displays each sample. I used out_ids for the x values. I used sample_values for the y values. I used sample_values for the marker size. 
+
